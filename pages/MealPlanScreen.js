@@ -7,7 +7,7 @@ import storage from '../utils/storage';
 import * as SQLite from 'expo-sqlite';
 
 const useDatabase = () => {
-    const db = SQLite.openDatabase('mealPlan1.db');
+    const db = SQLite.openDatabase('mealPlan.db');
     // Initialization and usage in the component
     useEffect(() => {
         //const setupDB = async () => {
@@ -102,10 +102,10 @@ const MealPlanScreen = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
             <View style={styles.buttonContainer}>
-                <Button title="Fetch Weekly Meal Plan" color="black" onPress={fetchPlan} />
+            <Button title="Fetch Weekly Meal Plan" color="#A9A9A9" onPress={fetchPlan} />
             </View>
             <View style={styles.buttonContainer}>
-                <Button title="Save Meal Plan" color="black" onPress={() => saveMealPlan(mealPlan)} />
+                <Button title="Save Meal Plan" color="#686868" onPress={() => saveMealPlan(mealPlan)} />
             </View>
             <View style={styles.buttonContainer}>
                 <Button title="Load Meal Plan" color="black" onPress={loadMealPlan} />

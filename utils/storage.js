@@ -43,25 +43,25 @@ const saveMealPlan = async (mealPlan,dataCon) => {
 
 const loadMealPlan = async (dataCon) => {
   const db = dataCon;
-  db.transaction(tx => {
-    tx.executeSql(
-      'SELECT plan FROM meal_plans ORDER BY id DESC LIMIT 1;',
-      [],
-      (_, { rows }) => {
-        if (rows.length > 0) {
-          return JSON.parse(rows._array[0].plan);
-        } else {
-          console.log('No meal plan found');
-          return null;
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT plan FROM meal_plans ORDER BY id DESC LIMIT 1;',
+        [],
+        (_, { rows }) => {
+          if (rows.length > 0) {
+            resolve(JSON.parse(rows._array[0].plan));
+          } else {
+            console.log('No meal plan found');
+            resolve(null); // Resolve with null when no meal plan found
+          }
+        },
+        (_, error) => {
+          console.log('Error loading meal plan: ', error);
+          reject(error); // Reject the promise if there's an error
         }
-      },
-      (_, error) => console.log('Error loading meal plan: ', error)
-    );
-  }, (error) => {
-    console.log('Transaction error during loading: ', error);
-    // Optional: Implement retry mechanism here
-  }, () => {
-    console.log('Load transaction successful');
+      );
+    });
   });
 };
 
