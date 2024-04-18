@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import RecipesAPI from '../api/RecipesAPI';
+import storage from '../utils/storage';
 
 const RecipeDetail = ({ route }) => {
   const { recipeId } = route.params;
@@ -16,7 +17,6 @@ const RecipeDetail = ({ route }) => {
         const details = await RecipesAPI.fetchRecipeDetails(recipeId);
         setRecipeDetails(details);
       } catch (error) {
-        // Handle the error as needed, such as showing an alert to the user
         console.error(error);
       }
       setIsLoading(false);
@@ -42,7 +42,6 @@ const RecipeDetail = ({ route }) => {
           <Text>{recipeDetails.readyInMinutes} minutes</Text>
           <Text style={styles.subHeading}>Instructions:</Text>
           <Text>{recipeDetails.instructions.replace(/<[^>]+>/g, '')}</Text>
-          {/* More details can be added similarly */}
         </>
       ) : (
         <Text>No details available.</Text>

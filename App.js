@@ -15,7 +15,7 @@ const App = () => {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
-          contentStyle: { paddingTop: 2, paddingBottom: 2 }  // Adds 2px padding to the top and bottom of all screens
+          contentStyle: { paddingTop: 2, paddingBottom: 2 }
         }}
       >
         <Stack.Screen 

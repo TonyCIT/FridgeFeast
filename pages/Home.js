@@ -27,25 +27,30 @@ const Home = ({ navigation }) => {
   const handleSurpriseMe = async () => {
     try {
       const randomRecipes = await RecipesAPI.fetchRandomRecipes();
-      if (randomRecipes && randomRecipes.length > 0) {
-        setRecipes(randomRecipes);
+      if (randomRecipes.length > 0) {
+        const randomRecipeId = randomRecipes[0].id;
+        navigation.navigate('RecipeDetail', { recipeId: randomRecipeId });
       }
     } catch (error) {
       console.error('Error fetching random recipes:', error);
     }
   };
+  
+  const handleWeekMeal = () => {
+    navigation.navigate('MealPlanScreen');
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Recipe Finder</Text>
-      <SearchForm onSubmit={handleSearch} onSurprise={handleSurpriseMe} navigation={navigation} />
+      <SearchForm onSubmit={handleSearch} onSurprise={handleSurpriseMe} onWeekMeal={handleWeekMeal} navigation={navigation} />
       <ScrollView style={styles.recipeList}>
         {recipes.map((recipe) => (
           <RecipeCard
             key={recipe.id.toString()}
             recipe={recipe}
             onPress={() => navigation.navigate('RecipeDetail', { recipeId: recipe.id })}
-            // onPress={() => handleRecipePress(recipe.id)} last one
+            // onPress={() => handleRecipePress(recipe.id)}
           />
         ))}
       </ScrollView>

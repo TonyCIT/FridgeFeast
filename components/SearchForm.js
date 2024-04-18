@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const SearchForm = ({ onSubmit, onSurprise, onFetchMealPlan, onViewMealPlan }) => {
+const SearchForm = ({ onSubmit, onSurprise, onWeekMeal }) => {
   const [query, setQuery] = useState('');
 
   const handleSubmit = () => {
+    console.log("Search submitted");
     onSubmit(query);
     setQuery('');
   };
@@ -20,7 +21,7 @@ const SearchForm = ({ onSubmit, onSurprise, onFetchMealPlan, onViewMealPlan }) =
           placeholder="Enter ingredients..."
           style={styles.input}
         />
-      </View>
+       </View>
       <View style={styles.buttonRow}>
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
           <Text style={styles.buttonText}>Search</Text>
@@ -28,13 +29,8 @@ const SearchForm = ({ onSubmit, onSurprise, onFetchMealPlan, onViewMealPlan }) =
         <TouchableOpacity onPress={onSurprise} style={styles.button}>
           <Text style={styles.buttonText}>Surprise Me!</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.buttonRow}>
-        <TouchableOpacity onPress={onFetchMealPlan} style={styles.button}>
-          <Text style={styles.buttonText}>Fetch Weekly Meal Plan</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onViewMealPlan} style={styles.button}>
-          <Text style={styles.buttonText}>View Weekly Meal Plan</Text>
+        <TouchableOpacity onPress={onWeekMeal} style={styles.button}>
+          <Text style={styles.buttonText}>Week Meal</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -71,7 +67,7 @@ const SearchForm = ({ onSubmit, onSurprise, onFetchMealPlan, onViewMealPlan }) =
 
 const styles = StyleSheet.create({
   formContainer: {
-    flexDirection: 'culomn',
+    flexDirection: 'column',
     padding: 10,
   },
   input: {
